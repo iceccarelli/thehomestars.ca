@@ -41,6 +41,7 @@ const REQUIRED: Record<string, string[]> = {
   job: ["name", "email", "title"],
   pro: ["name", "email", "company"],
   supplier: ["name", "email", "company"],
+  contact: ["name", "email", "message"],
 };
 
 function isEmail(v: unknown): boolean {

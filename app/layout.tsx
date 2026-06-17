@@ -1,28 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { BRAND, REGION, BRAND_TAGLINE } from "./brand";
+import SiteHeader from "./_components/site-header";
+import SiteFooter from "./_components/site-footer";
 
 export const metadata: Metadata = {
-  title: "RenoHub | Toronto & GTA Home Renovation Marketplace",
-  description:
-    "The all-in-one platform for homeowners, verified contractors, and suppliers across Toronto and the GTA. Post your project, get matched with trusted local pros, and source materials — all in one place.",
+  title: { default: `${BRAND} | ${REGION} Home Renovation Marketplace`, template: `%s · ${BRAND}` },
+  description: `${BRAND_TAGLINE} Post your project, match with verified ${REGION} pros, and source materials — all in one place.`,
   icons: { icon: "/favicon.ico" },
-  openGraph: {
-    title: "RenoHub — Renovate smarter in Toronto & the GTA",
-    description:
-      "Homeowners, verified local pros, and suppliers — perfectly aligned on one platform.",
-    type: "website",
-  },
+  openGraph: { title: `${BRAND} — Renovate smarter in ${REGION}`, description: BRAND_TAGLINE, type: "website" },
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#1E3A2F",
-};
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#1E3A2F" };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="h-full antialiased">
       <head>
@@ -34,7 +25,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SiteHeader />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
