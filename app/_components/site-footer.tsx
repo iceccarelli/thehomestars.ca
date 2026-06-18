@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Home, Phone, Mail } from "lucide-react";
-import { BRAND, REGION } from "@/app/brand";
+import { BRAND, REGION, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL } from "@/app/brand";
 
 const COLS = [
   { title: "Homeowners", links: [
@@ -30,8 +30,8 @@ export default function SiteFooter() {
               Built for {REGION}. Real local focus, verified pros, and transparent quotes — better outcomes for everyone.
             </p>
             <div className="flex flex-col gap-2 mt-4 text-sm">
-              <a href="tel:+14165550100" className="inline-flex items-center gap-2 text-[var(--spruce)] font-medium"><Phone className="w-4 h-4" /> (416) 555-0100</a>
-              <a href="mailto:hello@example.com" className="inline-flex items-center gap-2 text-[var(--spruce)] font-medium"><Mail className="w-4 h-4" /> hello@example.com</a>
+              <a href={`tel:${CONTACT_PHONE_TEL}`} className="inline-flex items-center gap-2 text-[var(--spruce)] font-medium"><Phone className="w-4 h-4" /> {CONTACT_PHONE}</a>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="inline-flex items-center gap-2 text-[var(--spruce)] font-medium"><Mail className="w-4 h-4" /> {CONTACT_EMAIL}</a>
             </div>
           </div>
           {COLS.map((col) => (

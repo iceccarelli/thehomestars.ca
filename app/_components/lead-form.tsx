@@ -77,6 +77,12 @@ export default function LeadForm({ kind, defaults = {}, hiddenContext }: { kind:
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    // Fast client-side check — instant feedback, no wasted round-trip.
+    const missing = cfg.fields.filter((f) => f.required && !values[f.name]?.trim()).map((f) => f.label);
+    if (missing.length) { setStatus("error"); setError(`Please fill in: ${missing.join(", ")}.`); return; }
+    if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+      setStatus("error"); setError("Please enter a valid email address."); return;
+    }
     setStatus("sending"); setError("");
     try {
       const res = await fetch("/api/leads", {

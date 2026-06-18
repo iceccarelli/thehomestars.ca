@@ -13,3 +13,10 @@ export const BRAND = "RenoHub";
 export const REGION = "Toronto GTA";
 export const BRAND_TAGLINE =
   "Homeowners, verified local pros, and suppliers — aligned in one place.";
+
+// Contact details — single source of truth. These are PLACEHOLDERS.
+// Set them to your real inbox/number before launch; they surface in the
+// footer and on /contact.
+export const CONTACT_EMAIL = "hello@example.com";
+export const CONTACT_PHONE = "(416) 555-0100";
+export const CONTACT_PHONE_TEL = "+14165550100";
