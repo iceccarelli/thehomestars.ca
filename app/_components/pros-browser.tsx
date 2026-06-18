@@ -58,8 +58,8 @@ export default function ProsBrowser({ initialCategory = "" }: { initialCategory?
         </div>
       ) : (
         <div className="text-center py-16 border border-dashed border-[var(--line)] rounded-3xl">
-          <p className="font-display text-xl mb-2">No pros match that yet</p>
-          <p className="text-[var(--ink-muted)] mb-5">Try a different trade or area — or post your job and let pros come to you.</p>
+          <p className="font-display text-xl mb-2">No verified pros to show yet</p>
+          <p className="text-[var(--ink-muted)] mb-5">We&apos;re onboarding pros across the GTA now. Post your job and the right pros will come to you as they join.</p>
           <a href="/post-job" className="btn-brass inline-flex items-center gap-2 px-6 py-3 rounded-2xl">Post a job</a>
         </div>
       )}

@@ -6,14 +6,14 @@ export const metadata: Metadata = { title: "How it works", description: "Post a 
 
 const STEPS = [
   { step: "01", title: "Post your project", desc: "Tell us what you're renovating, your budget, and your timeline. Add photos if you have them. It takes about two minutes and it's free." },
-  { step: "02", title: "Get matched with verified pros", desc: "Pros who specialize in your type of work and serve your area see your job and send competitive, itemized quotes — usually within 48 hours." },
+  { step: "02", title: "Get matched with verified pros", desc: "Pros who specialize in your type of work and serve your area see your job and send competitive, itemized quotes, and you're notified the moment they arrive." },
   { step: "03", title: "Source materials locally", desc: "Need tile, cabinets, or lumber? Request quotes from local suppliers without leaving the platform, so your pro and your materials stay in sync." },
   { step: "04", title: "Hire, build, and track", desc: "Compare quotes side by side, read verified reviews, choose your pro, and keep messages, milestones, and documents in one place." },
 ];
 const FAQ = [
   { q: "Is it free for homeowners?", a: "Yes. Posting a job and receiving quotes is completely free. You only ever pay the pro you choose, on terms you agree with them directly." },
   { q: "How are pros verified?", a: "Before a pro is listed we check business registration, liability insurance, and applicable trade licensing. Reviews come only from homeowners with a completed project." },
-  { q: "How fast will I hear back?", a: "Most homeowners receive their first quote within 48 hours. Popular trades in dense areas are often faster." },
+  { q: "How fast will I hear back?", a: "You're notified as soon as a pro responds. We're building toward fast first-quote times as the pro roster grows in your area." },
   { q: "What areas do you cover?", a: "Toronto and the Greater Toronto Area — including North York, Scarborough, Etobicoke, Mississauga, Vaughan, Markham, and surrounding municipalities." },
 ];
 

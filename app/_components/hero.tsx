@@ -3,12 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Shield, Star, MapPin } from "lucide-react";
+import { HERO_IMAGES } from "@/app/_lib/data";
 
-const SLIDES = [
-  { src: "https://images.unsplash.com/photo-1764526624453-db32c24eca55?auto=format&fit=crop&w=2100&q=80", kb: "kb1", alt: "Renovated modern kitchen with wood cabinets and island" },
-  { src: "https://images.unsplash.com/photo-1759238136854-a43787126db7?auto=format&fit=crop&w=2100&q=80", kb: "kb2", alt: "Warm living room with a fireplace and minimalist decor" },
-  { src: "https://images.unsplash.com/photo-1680965585463-386646047473?auto=format&fit=crop&w=2100&q=80", kb: "kb3", alt: "Living room with wood paneling and natural light" },
-];
+const SLIDES = HERO_IMAGES;
 
 export default function Hero() {
   const [slide, setSlide] = useState(0);
@@ -21,7 +18,7 @@ export default function Hero() {
     <section className="relative min-h-[78vh] sm:min-h-[82vh] flex items-end overflow-hidden">
       <div className="hero-stage" aria-hidden="true">
         {SLIDES.map((s, i) => (
-          <div key={i} className={`hero-slide ${s.kb} ${i === slide ? "is-active" : ""}`}>
+          <div key={i} className={`hero-slide kb${(i % 8) + 1} ${i === slide ? "is-active" : ""}`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={s.src} alt="" loading={i === 0 ? "eager" : "lazy"} fetchPriority={i === 0 ? "high" : "auto"} />
           </div>
@@ -33,7 +30,7 @@ export default function Hero() {
         <div className="max-w-2xl reveal">
           <div className="inline-flex items-center gap-2 bg-[var(--cream)]/90 border border-[var(--line)] rounded-full px-4 py-1.5 text-xs sm:text-sm mb-5 sm:mb-6">
             <span className="w-2 h-2 bg-[var(--brass)] rounded-full animate-pulse" />
-            Trusted by 2,400+ homeowners &amp; 680+ pros in the GTA
+            Now onboarding GTA homeowners, pros &amp; suppliers
           </div>
           <h1 className="font-display text-[var(--cream)] font-semibold tracking-tight leading-[1.02] text-4xl sm:text-5xl lg:text-7xl mb-5">
             The smarter way to renovate in Toronto &amp; the GTA
@@ -50,8 +47,8 @@ export default function Hero() {
             </Link>
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8 text-xs sm:text-sm text-[var(--cream)]/85">
-            <span className="flex items-center gap-2"><Shield className="w-4 h-4" /> Insurance verified</span>
-            <span className="flex items-center gap-2"><Star className="w-4 h-4" /> Real reviews only</span>
+            <span className="flex items-center gap-2"><Shield className="w-4 h-4" /> Insurance &amp; licence checked at onboarding</span>
+            <span className="flex items-center gap-2"><Star className="w-4 h-4" /> Reviews only from completed jobs</span>
             <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> Toronto &amp; GTA focused</span>
           </div>
         </div>

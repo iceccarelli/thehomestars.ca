@@ -3,8 +3,9 @@ import { ArrowRight, CheckCircle, Hammer, Quote } from "lucide-react";
 import Hero from "./_components/hero";
 import ProCard from "./_components/pro-card";
 import SupplierCard from "./_components/supplier-card";
+import CineFrame from "./_components/cine-frame";
 import { Container, SectionHeading, Btn } from "./_components/ui";
-import { PROS, SUPPLIERS, CATEGORIES, PORTFOLIO } from "./_lib/data";
+import { PROS, SUPPLIERS, CATEGORIES, SHOWCASE_IMAGES } from "./_lib/data";
 
 const STEPS = [
   { step: "01", title: "Post your project", desc: "Describe your renovation, add a budget and photos. About two minutes." },
@@ -18,10 +19,10 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Stats strip */}
+      {/* Value strip — model promises, not fabricated metrics */}
       <div className="bg-[var(--cream-soft)] border-b border-[var(--line)]">
         <Container className="py-8 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-          {[["2,400+", "Homeowners served"], ["680+", "Verified pros"], ["4.8★", "Average pro rating"], ["48 hrs", "Median time to first quote"]].map(([n, l]) => (
+          {[["Free", "To post a project"], ["Verified", "Insurance & licence checks"], ["No paid", "placement, ever"], ["GTA", "Local pros & suppliers"]].map(([n, l]) => (
             <div key={l}>
               <div className="font-display text-2xl sm:text-3xl font-semibold text-[var(--spruce)]">{n}</div>
               <div className="text-xs sm:text-sm text-[var(--ink-muted)] mt-1">{l}</div>
@@ -51,7 +52,7 @@ export default function HomePage() {
             <div className="eyebrow text-[var(--brass-light)] mb-4">What good looks like</div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.05] mb-6">Renovations worth showing off — by people you can trust</h2>
             <p className="text-[var(--cream)]/80 text-base sm:text-lg mb-8 leading-relaxed">
-              Every pro is insurance-verified and rated only by homeowners who actually hired them. No paid placement, no fake reviews — just real {""}
+              Every pro is insurance- and licence-checked before listing, and rated only by homeowners who actually hired them. No paid placement, ever — just real {""}
               GTA craftspeople and transparent quotes.
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -65,8 +66,7 @@ export default function HomePage() {
           </div>
           <div className="order-1 lg:order-2">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={PORTFOLIO.bathroom} alt="Renovated bathroom with green cabinetry and marble" loading="lazy" className="w-full h-full object-cover" />
+              <CineFrame images={SHOWCASE_IMAGES} />
             </div>
           </div>
         </Container>
@@ -87,36 +87,52 @@ export default function HomePage() {
         <div className="text-center mt-10"><Btn href="/how-it-works" variant="secondary">See the full process <ArrowRight className="w-4 h-4" /></Btn></div>
       </Container>
 
-      {/* Featured pros */}
+      {/* Featured pros — empty until real pros onboard */}
       <div className="bg-[var(--cream-soft)] border-y border-[var(--line)] py-14 sm:py-20">
         <Container>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
-            <SectionHeading eyebrow="Top rated in the GTA" title="Verified local pros" />
-            <Link href="/pros" className="btn-ghost inline-flex items-center gap-2">Browse all pros <ArrowRight className="w-4 h-4" /></Link>
+            <SectionHeading eyebrow="The early roster" title="Verified local pros" />
+            <Link href="/pros" className="btn-ghost inline-flex items-center gap-2">Browse pros <ArrowRight className="w-4 h-4" /></Link>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {PROS.slice(0, 3).map((p) => <ProCard key={p.slug} pro={p} />)}
-          </div>
+          {PROS.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {PROS.slice(0, 3).map((p) => <ProCard key={p.slug} pro={p} />)}
+            </div>
+          ) : (
+            <div className="card rounded-3xl p-8 sm:p-12 text-center">
+              <p className="font-display text-2xl mb-2">Be one of the first verified pros in the GTA</p>
+              <p className="text-[var(--ink-muted)] max-w-xl mx-auto mb-6">We&apos;re onboarding renovation pros now. Get listed early, build a verified reputation from your first completed job, and receive homeowner leads as they come in.</p>
+              <Btn href="/for-pros" variant="brass">Join as a pro <ArrowRight className="w-4 h-4" /></Btn>
+            </div>
+          )}
         </Container>
       </div>
 
-      {/* Suppliers preview */}
+      {/* Suppliers preview — empty until real suppliers are vetted */}
       <Container className="py-14 sm:py-20">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
           <SectionHeading eyebrow="Integrated supply chain" title="Source materials locally" />
-          <Link href="/suppliers" className="btn-ghost inline-flex items-center gap-2">All suppliers <ArrowRight className="w-4 h-4" /></Link>
+          <Link href="/suppliers" className="btn-ghost inline-flex items-center gap-2">Suppliers <ArrowRight className="w-4 h-4" /></Link>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {SUPPLIERS.map((s) => <SupplierCard key={s.slug} supplier={s} />)}
-        </div>
+        {SUPPLIERS.length > 0 ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            {SUPPLIERS.map((s) => <SupplierCard key={s.slug} supplier={s} />)}
+          </div>
+        ) : (
+          <div className="card rounded-3xl p-8 sm:p-12 text-center">
+            <p className="font-display text-2xl mb-2">Run a supply business in the GTA?</p>
+            <p className="text-[var(--ink-muted)] max-w-xl mx-auto mb-6">We&apos;re building a curated directory of local material suppliers — lumber, tile &amp; stone, cabinetry and more — so homeowners and pros can quote materials in one place. List your business to reach active renovation projects.</p>
+            <Btn href="/suppliers#list" variant="secondary">List your supply business <ArrowRight className="w-4 h-4" /></Btn>
+          </div>
+        )}
       </Container>
 
-      {/* Testimonial */}
+      {/* Mission — no fabricated testimonials until real ones exist */}
       <div className="bg-[var(--cream-soft)] border-y border-[var(--line)] py-14 sm:py-16">
         <Container className="max-w-3xl text-center">
           <Quote className="w-9 h-9 text-[var(--brass)] mx-auto mb-5" />
-          <p className="font-display text-xl sm:text-2xl lg:text-3xl leading-snug mb-6">We posted our kitchen reno on a Sunday and had three verified quotes by Tuesday. The whole thing felt transparent — no chasing, no guesswork.</p>
-          <div className="text-[var(--ink-muted)] text-sm">Priya &amp; Daniel — Leaside, Toronto</div>
+          <p className="font-display text-xl sm:text-2xl lg:text-3xl leading-snug mb-6">Renovating shouldn&apos;t mean chasing quotes or guessing who to trust. We&apos;re building one transparent place where homeowners, vetted pros, and local suppliers actually line up.</p>
+          <div className="text-[var(--ink-muted)] text-sm">Real reviews will appear here as homeowners complete projects.</div>
         </Container>
       </div>
 
@@ -124,7 +140,7 @@ export default function HomePage() {
       <div className="bg-[var(--spruce)] text-[var(--cream)] py-16 sm:py-20">
         <Container className="max-w-3xl text-center">
           <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-4">Ready to start your renovation the right way?</h2>
-          <p className="text-lg sm:text-xl text-[var(--cream)]/85 mb-8">Join thousands of GTA homeowners renovating smarter.</p>
+          <p className="text-lg sm:text-xl text-[var(--cream)]/85 mb-8">Be one of the first GTA homeowners to renovate the smarter way.</p>
           <Btn href="/post-job" variant="brass" className="px-9 py-4 text-base sm:text-lg">Post your job for free <ArrowRight className="w-5 h-5" /></Btn>
           <div className="mt-4 text-sm text-[var(--cream)]/70">No credit card required · Instant matching with local pros</div>
         </Container>

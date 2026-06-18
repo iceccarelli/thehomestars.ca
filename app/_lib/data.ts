@@ -65,94 +65,46 @@ export const PORTFOLIO = {
   bathroom: "https://images.unsplash.com/photo-1682888818704-6dc91e9d7532?auto=format&fit=crop&w=1600&q=80",
 };
 
+export interface Photo { src: string; alt: string; }
+const U = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+
+// ── Cinematic background set #1: the hero. Aspirational, finished GTA spaces. ──
+// All Unsplash License (free commercial use, no attribution required). Swap any
+// src here and it updates everywhere the hero renders.
+export const HERO_IMAGES: Photo[] = [
+  { src: U("1764526624453-db32c24eca55", 2100), alt: "Renovated modern kitchen with wood cabinets and a large island" },
+  { src: U("1759238136854-a43787126db7", 2100), alt: "Warm living room with a fireplace and minimalist decor" },
+  { src: U("1618221195710-dd6b41faaea6", 2100), alt: "Bright open living room with neutral furnishings" },
+  { src: U("1680965585463-386646047473", 2100), alt: "Living room with wood paneling and natural light" },
+  { src: U("1618832515490-e181c4794a45", 2100), alt: "Freshly renovated kitchen with warm finishes" },
+  { src: U("1521783593447-5702b9bfd267", 2100), alt: "Freestanding bathtub beside a large framed window" },
+  { src: U("1586023492125-27b2c045efd7", 2100), alt: "Sunlit living space with a designer accent chair" },
+  { src: U("1599619585752-c3edb42a414c", 2100), alt: "Bright, airy home interior during renovation" },
+];
+
+// ── Cinematic background set #2: the “what good looks like” showcase frame. ──
+// Finished detail shots — kitchens, baths, vanities.
+export const SHOWCASE_IMAGES: Photo[] = [
+  { src: U("1682888818704-6dc91e9d7532", 1600), alt: "Renovated bathroom with green cabinetry and marble" },
+  { src: U("1565538810643-b5bdb714032a", 1600), alt: "Modern kitchen with an island and bar stools" },
+  { src: U("1507089947368-19c1da9775ae", 1600), alt: "Clean white kitchen with full cabinetry" },
+  { src: U("1484154218962-a197022b5858", 1600), alt: "Modular kitchen with stainless steel appliances" },
+  { src: U("1584622650111-993a426fbf0a", 1600), alt: "Double vanity with white ceramic sinks" },
+  { src: U("1620626011761-996317b8d101", 1600), alt: "Freestanding bathtub beside a potted plant" },
+  { src: U("1629079447777-1e605162dc8d", 1600), alt: "Vanity with a framed mirror and modern fixtures" },
+  { src: U("1631048499052-e6d9f305d2c0", 1600), alt: "Ceramic sink with a brushed steel faucet" },
+];
+
 export const PROS: Pro[] = [
-  {
-    slug: "apex-renovations",
-    name: "Apex Renovations Inc.",
-    tagline: "Full-home renovations, project-managed end to end",
-    rating: 4.9, reviews: 187, category: "Full Home Reno",
-    specialties: ["Full home reno", "Kitchens", "Additions"],
-    location: "Toronto", serves: ["Toronto", "North York", "Vaughan", "Markham"],
-    verified: true, available: "Next week", years: 14,
-    blurb: "A design-build team handling permits, trades, and finishes under one roof. Known for transparent fixed-price quotes and finishing on schedule.",
-    highlights: ["WSIB & $2M liability insured", "Fixed-price quotes, no surprises", "Dedicated project manager per job", "5-year workmanship warranty"],
-    recentReviews: [
-      { author: "Priya S.", rating: 5, project: "Kitchen + main floor", text: "Quote held to the dollar and they finished two days early. The project manager texted updates every Friday." },
-      { author: "Marc D.", rating: 5, project: "Full home reno", text: "Lived through a gut reno without losing my mind. Clear schedule, clean site, great trades." },
-      { author: "Aileen W.", rating: 4, project: "Addition", text: "Permitting took longer than hoped, but the build quality is excellent and communication was steady." },
-    ],
-  },
-  {
-    slug: "gta-kitchen-pros",
-    name: "GTA Kitchen Pros",
-    tagline: "Kitchens and baths, in and out in weeks not months",
-    rating: 4.8, reviews: 142, category: "Kitchen & Bath",
-    specialties: ["Kitchens", "Bathrooms", "Cabinetry"],
-    location: "North York", serves: ["Toronto", "North York", "Scarborough", "Richmond Hill"],
-    verified: true, available: "This week", years: 9,
-    blurb: "Specialists who do kitchens and bathrooms only — and do them fast. Detailed material allowances so your budget is clear before demo day.",
-    highlights: ["Kitchen & bath specialists", "Detailed material allowances", "Licensed plumbing & electrical", "Average 4-week kitchen turnaround"],
-    recentReviews: [
-      { author: "Tom & Lena", rating: 5, project: "Kitchen reno", text: "Three quotes, theirs was the clearest by far. Cabinets are flawless." },
-      { author: "Sandra K.", rating: 5, project: "Ensuite bath", text: "Heated floors and a curbless shower — exactly the drawings, on budget." },
-      { author: "Devon R.", rating: 4, project: "Kitchen reno", text: "Quick and tidy. One backsplash tile had to be redone and they handled it without fuss." },
-    ],
-  },
-  {
-    slug: "precision-handyman",
-    name: "Precision Handyman Services",
-    tagline: "The reliable pro for the jobs that pile up",
-    rating: 4.7, reviews: 89, category: "Handyman & Repairs",
-    specialties: ["Repairs", "Installs", "Carpentry"],
-    location: "Mississauga", serves: ["Mississauga", "Etobicoke", "Oakville", "Brampton"],
-    verified: true, available: "Tomorrow", years: 7,
-    blurb: "One call for the punch-list — mounting, trim, drywall repair, fixtures and the small carpentry that never gets done. Upfront hourly and half-day rates.",
-    highlights: ["Upfront hourly & half-day rates", "Insured & background-checked", "Same-week availability", "Photos before & after every visit"],
-    recentReviews: [
-      { author: "Hannah L.", rating: 5, project: "Punch-list day", text: "Knocked out 11 things on my list in one afternoon. Booking again." },
-      { author: "Ravi P.", rating: 5, project: "Trim & doors", text: "New baseboards and three doors hung dead level. Cleaned up after himself too." },
-      { author: "Cathy M.", rating: 4, project: "Drywall repair", text: "Solid work and fair price. Arrived 30 min late but called ahead." },
-    ],
-  },
-  {
-    slug: "northwood-basements",
-    name: "Northwood Basement Co.",
-    tagline: "Dry, finished basements that pass inspection the first time",
-    rating: 4.8, reviews: 64, category: "Basement Finishing",
-    specialties: ["Waterproofing", "Framing", "Finishing"],
-    location: "Vaughan", serves: ["Vaughan", "Toronto", "Richmond Hill", "Aurora"],
-    verified: true, available: "2 weeks", years: 11,
-    blurb: "Basements only — from waterproofing and underpinning to finished suites with legal egress. Permit drawings included on every finishing job.",
-    highlights: ["Waterproofing + finishing under one team", "Permit drawings included", "Legal second-suite experience", "Transferable waterproofing warranty"],
-    recentReviews: [
-      { author: "Jon F.", rating: 5, project: "Basement apartment", text: "Turned a damp basement into a rentable suite. Passed inspection first try." },
-      { author: "Mira T.", rating: 5, project: "Rec room", text: "No more musty smell and a beautiful space. They found the leak two others missed." },
-      { author: "Greg A.", rating: 4, project: "Waterproofing", text: "Messy week of digging but the basement is bone dry through spring melt." },
-    ],
-  },
+  // No fabricated pros. Real verified pros appear here as they onboard.
 ];
 
 export const SUPPLIERS: Supplier[] = [
-  { slug: "toronto-lumber", name: "Toronto Lumber & Building Supply", category: "Lumber & Framing", location: "Toronto", rating: 4.6, reviews: 211,
-    products: ["Framing lumber", "Plywood & OSB", "Engineered wood", "Fasteners"], delivery: "Next-day GTA delivery",
-    blurb: "Contractor pricing on framing materials with reliable jobsite delivery across the GTA." },
-  { slug: "stone-tile-direct", name: "Stone & Tile Direct GTA", category: "Tile & Stone", location: "Mississauga", rating: 4.8, reviews: 158,
-    products: ["Porcelain & ceramic", "Natural stone", "Mosaics", "Large-format slabs"], delivery: "Pickup or scheduled delivery",
-    blurb: "Showroom and warehouse with trade discounts on tile, slab and stone for kitchens and baths." },
-  { slug: "cabinetry-solutions", name: "Cabinetry Solutions Canada", category: "Cabinets & Millwork", location: "Toronto", rating: 4.5, reviews: 97,
-    products: ["Custom cabinets", "Semi-custom lines", "Vanities", "Closets & millwork"], delivery: "4–6 week lead time",
-    blurb: "Custom and semi-custom cabinetry built locally, with design support and trade pricing." },
+  // No fabricated suppliers. Real local suppliers appear here as they're vetted.
 ];
 
 export const SEED_JOBS: Job[] = [
-  { id: 1, title: "Kitchen renovation — full gut & remodel", category: "Kitchen Reno", location: "Toronto, ON", budget: "$25,000 – $45,000", timeline: "6–8 weeks", posted: "2 hours ago",
-    description: "Complete kitchen renovation including new cabinets, quartz counters, backsplash and appliances in a detached home in Leaside." },
-  { id: 2, title: "Basement waterproofing & finishing", category: "Basement", location: "Mississauga, ON", budget: "$18,000 – $32,000", timeline: "4–6 weeks", posted: "5 hours ago",
-    description: "Waterproofing plus full finishing of 800 sq ft basement with a 3-piece bathroom and bedroom." },
-  { id: 3, title: "Master bathroom renovation", category: "Bathroom", location: "Toronto, ON", budget: "$12,000 – $22,000", timeline: "3–4 weeks", posted: "Yesterday",
-    description: "Luxury master bath update: new tub, glass shower, heated floors and a custom vanity." },
-  { id: 4, title: "Rear deck rebuild with pergola", category: "Additions & Decks", location: "Oakville, ON", budget: "$14,000 – $24,000", timeline: "3–5 weeks", posted: "Yesterday",
-    description: "Tear down and rebuild a 320 sq ft cedar deck with a covered pergola and pot lights." },
+  // No fabricated jobs. Real homeowner posts populate this once live.
 ];
 
 export function proBySlug(slug: string): Pro | undefined {

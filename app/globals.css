@@ -82,12 +82,41 @@ body { background: var(--cream); color: var(--ink); font-family: var(--font-body
 .hero-slide.kb1 img { animation: kb1 26s ease-in-out infinite alternate; }
 .hero-slide.kb2 img { animation: kb2 30s ease-in-out infinite alternate; }
 .hero-slide.kb3 img { animation: kb3 24s ease-in-out infinite alternate; }
+.hero-slide.kb4 img { animation: kb4 28s ease-in-out infinite alternate; }
+.hero-slide.kb5 img { animation: kb5 32s ease-in-out infinite alternate; }
+.hero-slide.kb6 img { animation: kb6 25s ease-in-out infinite alternate; }
+.hero-slide.kb7 img { animation: kb7 27s ease-in-out infinite alternate; }
+.hero-slide.kb8 img { animation: kb8 31s ease-in-out infinite alternate; }
 @keyframes kb1 { from { transform: scale(1.06) translate(0,0); } to { transform: scale(1.20) translate(-3%,-2%); } }
 @keyframes kb2 { from { transform: scale(1.18) translate(2%,1.5%); } to { transform: scale(1.04) translate(-2%,-1%); } }
 @keyframes kb3 { from { transform: scale(1.05) translate(-2%,1%); } to { transform: scale(1.22) translate(2%,-2%); } }
+@keyframes kb4 { from { transform: scale(1.08) translate(2%,-1%); } to { transform: scale(1.20) translate(-2%,2%); } }
+@keyframes kb5 { from { transform: scale(1.16) translate(-2%,-1.5%); } to { transform: scale(1.04) translate(2%,1%); } }
+@keyframes kb6 { from { transform: scale(1.05) translate(0,2%); } to { transform: scale(1.18) translate(-1.5%,-2%); } }
+@keyframes kb7 { from { transform: scale(1.20) translate(1%,1%); } to { transform: scale(1.06) translate(-2%,-1%); } }
+@keyframes kb8 { from { transform: scale(1.06) translate(-1%,-2%); } to { transform: scale(1.22) translate(2%,1.5%); } }
+
+/* Cinematic cross-fade frame (editorial showcase) — reuses kb keyframes */
+.cine-stage { position: absolute; inset: 0; overflow: hidden; background: var(--spruce-deep); }
+.cine-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1300ms ease-in-out; will-change: opacity; }
+.cine-slide.is-active { opacity: 1; }
+.cine-slide img { width: 100%; height: 100%; object-fit: cover; transform-origin: center; will-change: transform; }
+.cine-slide.kb1 img { animation: kb1 24s ease-in-out infinite alternate; }
+.cine-slide.kb2 img { animation: kb4 26s ease-in-out infinite alternate; }
+.cine-slide.kb3 img { animation: kb6 23s ease-in-out infinite alternate; }
+.cine-slide.kb4 img { animation: kb8 27s ease-in-out infinite alternate; }
+.cine-slide.kb5 img { animation: kb3 25s ease-in-out infinite alternate; }
+.cine-slide.kb6 img { animation: kb5 28s ease-in-out infinite alternate; }
+.cine-slide.kb7 img { animation: kb7 24s ease-in-out infinite alternate; }
+.cine-slide.kb8 img { animation: kb2 26s ease-in-out infinite alternate; }
+/* subtle cinematic vignette so detail shots read against the dark editorial panel */
+.cine-vignette { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(13,26,21,.28) 100%); }
+.cine-dot { width: 7px; height: 7px; border-radius: 9999px; background: rgba(246,241,231,.5); transition: all .3s; }
+.cine-dot.is-active { background: var(--brass-light); width: 22px; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-slide img { animation: none !important; }
-  .hero-slide { transition: opacity 600ms ease; }
+  .hero-slide img, .cine-slide img { animation: none !important; }
+  .hero-slide, .cine-slide { transition: opacity 600ms ease; }
   html { scroll-behavior: auto; }
 }
 .hero-scrim { position: absolute; inset: 0; background:
