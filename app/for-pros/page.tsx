@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { CheckCircle } from "lucide-react";
 import { Container, SectionHeading } from "../_components/ui";
 import LeadForm from "../_components/lead-form";
+import SectionBg from "../_components/section-bg";
+import { SECTION_FORPROS } from "../_lib/data";
 
 export const metadata: Metadata = { title: "For pros", description: "Win local renovation work without chasing leads. Join verified GTA pros getting matched to homeowners ready to hire." };
 
@@ -15,8 +17,9 @@ const REASONS = [
 export default function ForProsPage() {
   return (
     <>
-      <div className="bg-[var(--spruce)] text-[var(--cream)]">
-        <Container className="py-16 sm:py-20 max-w-3xl text-center">
+      <div className="relative overflow-hidden bg-[var(--spruce)] text-[var(--cream)]">
+        <SectionBg images={SECTION_FORPROS} />
+        <Container className="relative z-10 py-16 sm:py-20 max-w-3xl text-center">
           <div className="eyebrow text-[var(--brass-light)] mb-3">For pros & contractors</div>
           <h1 className="font-display text-4xl sm:text-5xl font-semibold leading-tight mb-5">Win local work without chasing leads</h1>
           <p className="text-[var(--cream)]/85 text-lg">Get matched with GTA homeowners who are ready to hire — and spend your time building, not bidding.</p>

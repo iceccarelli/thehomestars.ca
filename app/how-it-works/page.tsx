@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import { Container, SectionHeading, Btn } from "../_components/ui";
+import SectionBg from "../_components/section-bg";
+import { SECTION_HOWITWORKS } from "../_lib/data";
 
 export const metadata: Metadata = { title: "How it works", description: "Post a project, get matched with verified GTA pros, source materials, and complete your renovation — all in one place." };
 
@@ -20,8 +22,9 @@ const FAQ = [
 export default function HowItWorksPage() {
   return (
     <>
-      <div className="bg-[var(--spruce)] text-[var(--cream)]">
-        <Container className="py-16 sm:py-20 text-center max-w-3xl">
+      <div className="relative overflow-hidden bg-[var(--spruce)] text-[var(--cream)]">
+        <SectionBg images={SECTION_HOWITWORKS} />
+        <Container className="relative z-10 py-16 sm:py-20 text-center max-w-3xl">
           <div className="eyebrow text-[var(--brass-light)] mb-3">How it works</div>
           <h1 className="font-display text-4xl sm:text-5xl font-semibold leading-tight mb-5">From idea to finished reno, without the guesswork</h1>
           <p className="text-[var(--cream)]/85 text-lg">One place for homeowners, verified pros, and suppliers — so quotes are transparent and nothing falls through the cracks.</p>

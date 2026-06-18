@@ -95,6 +95,51 @@ export const SHOWCASE_IMAGES: Photo[] = [
   { src: U("1631048499052-e6d9f305d2c0", 1600), alt: "Ceramic sink with a brushed steel faucet" },
 ];
 
+// ── Section background sets (8 each). Used by <SectionBg>, which randomizes the
+// entry image per visit and rotates with a cinematic Ken-Burns drift. Themed to
+// each section's headline. All Unsplash License. Swap any line to retheme. ──
+const B = (id: string) => U(id, 2000);
+
+// "Ready to start your renovation the right way?" — aspirational finished homes.
+export const SECTION_CTA: Photo[] = [
+  { src: B("1764526624453-db32c24eca55"), alt: "" }, { src: B("1759238136854-a43787126db7"), alt: "" },
+  { src: B("1618221195710-dd6b41faaea6"), alt: "" }, { src: B("1618832515490-e181c4794a45"), alt: "" },
+  { src: B("1521783593447-5702b9bfd267"), alt: "" }, { src: B("1586023492125-27b2c045efd7"), alt: "" },
+  { src: B("1599619585752-c3edb42a414c"), alt: "" }, { src: B("1682888818704-6dc91e9d7532"), alt: "" },
+];
+
+// "How it works" — idea → build → finished reno.
+export const SECTION_HOWITWORKS: Photo[] = [
+  { src: B("1634255970497-78ffb2b08ae8"), alt: "" }, { src: B("1563874093519-ca5eda5cd776"), alt: "" },
+  { src: B("1587582423116-ec07293f0395"), alt: "" }, { src: B("1680965585463-386646047473"), alt: "" },
+  { src: B("1565538810643-b5bdb714032a"), alt: "" }, { src: B("1507089947368-19c1da9775ae"), alt: "" },
+  { src: B("1484154218962-a197022b5858"), alt: "" }, { src: B("1584622650111-993a426fbf0a"), alt: "" },
+];
+
+// "Find verified local pros" — trades at work + finished craftsmanship.
+export const SECTION_PROS: Photo[] = [
+  { src: B("1589939705384-5185137a7f0f"), alt: "" }, { src: B("1587582423116-ec07293f0395"), alt: "" },
+  { src: B("1541888946425-d81bb19240f5"), alt: "" }, { src: B("1634255970497-78ffb2b08ae8"), alt: "" },
+  { src: B("1563874093519-ca5eda5cd776"), alt: "" }, { src: B("1620626011761-996317b8d101"), alt: "" },
+  { src: B("1629079447777-1e605162dc8d"), alt: "" }, { src: B("1631048499052-e6d9f305d2c0"), alt: "" },
+];
+
+// "Source materials from local suppliers" — wood, materials, finished surfaces.
+export const SECTION_SUPPLIERS: Photo[] = [
+  { src: B("1563874093519-ca5eda5cd776"), alt: "" }, { src: B("1634255970497-78ffb2b08ae8"), alt: "" },
+  { src: B("1680965585463-386646047473"), alt: "" }, { src: B("1682888818704-6dc91e9d7532"), alt: "" },
+  { src: B("1584622650111-993a426fbf0a"), alt: "" }, { src: B("1631048499052-e6d9f305d2c0"), alt: "" },
+  { src: B("1484154218962-a197022b5858"), alt: "" }, { src: B("1565538810643-b5bdb714032a"), alt: "" },
+];
+
+// "Win local work without chasing leads" — contractors, tools, the work + result.
+export const SECTION_FORPROS: Photo[] = [
+  { src: B("1589939705384-5185137a7f0f"), alt: "" }, { src: B("1541888946425-d81bb19240f5"), alt: "" },
+  { src: B("1587582423116-ec07293f0395"), alt: "" }, { src: B("1634255970497-78ffb2b08ae8"), alt: "" },
+  { src: B("1563874093519-ca5eda5cd776"), alt: "" }, { src: B("1618832515490-e181c4794a45"), alt: "" },
+  { src: B("1507089947368-19c1da9775ae"), alt: "" }, { src: B("1764526624453-db32c24eca55"), alt: "" },
+];
+
 export const PROS: Pro[] = [
   // No fabricated pros. Real verified pros appear here as they onboard.
 ];

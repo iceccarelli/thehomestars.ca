@@ -4,8 +4,9 @@ import Hero from "./_components/hero";
 import ProCard from "./_components/pro-card";
 import SupplierCard from "./_components/supplier-card";
 import CineFrame from "./_components/cine-frame";
+import SectionBg from "./_components/section-bg";
 import { Container, SectionHeading, Btn } from "./_components/ui";
-import { PROS, SUPPLIERS, CATEGORIES, SHOWCASE_IMAGES } from "./_lib/data";
+import { PROS, SUPPLIERS, CATEGORIES, SHOWCASE_IMAGES, SECTION_CTA } from "./_lib/data";
 
 const STEPS = [
   { step: "01", title: "Post your project", desc: "Describe your renovation, add a budget and photos. About two minutes." },
@@ -137,8 +138,9 @@ export default function HomePage() {
       </div>
 
       {/* Final CTA */}
-      <div className="bg-[var(--spruce)] text-[var(--cream)] py-16 sm:py-20">
-        <Container className="max-w-3xl text-center">
+      <div className="relative overflow-hidden bg-[var(--spruce)] text-[var(--cream)] py-16 sm:py-20">
+        <SectionBg images={SECTION_CTA} intensity="max" />
+        <Container className="relative z-10 max-w-3xl text-center">
           <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-4">Ready to start your renovation the right way?</h2>
           <p className="text-lg sm:text-xl text-[var(--cream)]/85 mb-8">Be one of the first GTA homeowners to renovate the smarter way.</p>
           <Btn href="/post-job" variant="brass" className="px-9 py-4 text-base sm:text-lg">Post your job for free <ArrowRight className="w-5 h-5" /></Btn>

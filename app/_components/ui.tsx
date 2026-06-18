@@ -32,12 +32,12 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
   return <div className="eyebrow mb-3">{children}</div>;
 }
 
-export function SectionHeading({ eyebrow, title, sub, center = false }: { eyebrow?: string; title: string; sub?: string; center?: boolean }) {
+export function SectionHeading({ eyebrow, title, sub, center = false, light = false }: { eyebrow?: string; title: string; sub?: string; center?: boolean; light?: boolean }) {
   return (
     <div className={center ? "text-center max-w-2xl mx-auto" : "max-w-2xl"}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 className="section-title">{title}</h2>
-      {sub && <p className="text-[var(--ink-muted)] text-base sm:text-lg mt-3 leading-relaxed">{sub}</p>}
+      {eyebrow && <div className="eyebrow mb-3" style={light ? { color: "var(--brass-light)" } : undefined}>{eyebrow}</div>}
+      <h2 className="section-title" style={light ? { color: "#ffffff" } : undefined}>{title}</h2>
+      {sub && <p className={`text-base sm:text-lg mt-3 leading-relaxed ${light ? "" : "text-[var(--ink-muted)]"}`} style={light ? { color: "#ffffff" } : undefined}>{sub}</p>}
     </div>
   );
 }
