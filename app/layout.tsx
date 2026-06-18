@@ -5,10 +5,21 @@ import SiteHeader from "./_components/site-header";
 import SiteFooter from "./_components/site-footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://thehomestars.ca"),
   title: { default: `${BRAND} | ${REGION} Home Renovation Marketplace`, template: `%s · ${BRAND}` },
   description: `${BRAND_TAGLINE} Post your project, match with verified ${REGION} pros, and source materials — all in one place.`,
   icons: { icon: "/favicon.ico" },
-  openGraph: { title: `${BRAND} — Renovate smarter in ${REGION}`, description: BRAND_TAGLINE, type: "website" },
+  openGraph: {
+    title: `${BRAND} — Renovate smarter in ${REGION}`,
+    description: BRAND_TAGLINE,
+    type: "website",
+    siteName: BRAND,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${BRAND} — Renovate smarter in ${REGION}`,
+    description: BRAND_TAGLINE,
+  },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#1E3A2F" };

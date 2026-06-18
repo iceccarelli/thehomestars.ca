@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Home, Phone, Mail } from "lucide-react";
-import { BRAND, REGION, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL } from "@/app/brand";
+import { Home, Phone, Mail, MapPin } from "lucide-react";
+import { BRAND, REGION, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL, CONTACT_ADDRESS } from "@/app/brand";
+import SocialRow from "./social-links";
 
 const COLS = [
   { title: "Homeowners", links: [
@@ -32,6 +33,7 @@ export default function SiteFooter() {
             <div className="flex flex-col gap-2 mt-4 text-sm">
               <a href={`tel:${CONTACT_PHONE_TEL}`} className="inline-flex items-center gap-2 text-[var(--spruce)] font-medium"><Phone className="w-4 h-4" /> {CONTACT_PHONE}</a>
               <a href={`mailto:${CONTACT_EMAIL}`} className="inline-flex items-center gap-2 text-[var(--spruce)] font-medium"><Mail className="w-4 h-4" /> {CONTACT_EMAIL}</a>
+              <span className="inline-flex items-start gap-2 text-[var(--ink-muted)]"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> {CONTACT_ADDRESS}</span>
             </div>
           </div>
           {COLS.map((col) => (
@@ -47,7 +49,11 @@ export default function SiteFooter() {
             </div>
           ))}
         </div>
-        <div className="border-t border-[var(--line)] mt-10 pt-6 flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-[var(--ink-muted)]">
+        <div className="border-t border-[var(--line)] mt-10 pt-7 flex flex-col sm:flex-row items-center justify-between gap-5">
+          <span className="eyebrow">Follow {BRAND}</span>
+          <SocialRow />
+        </div>
+        <div className="mt-7 pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-[var(--ink-muted)]">
           <span>© {new Date().getFullYear()} {BRAND}. A {REGION} renovation marketplace.</span>
           <span>Insurance-verified pros · Real reviews only · No paid placement</span>
         </div>

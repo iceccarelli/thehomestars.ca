@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Menu, X, ArrowRight } from "lucide-react";
@@ -15,11 +15,32 @@ const NAV = [
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
+  // App-style header: hides when scrolling down, reappears when scrolling up.
+  useEffect(() => {
+    if (open) { setHidden(false); return; }
+    let last = window.scrollY;
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (y > last && y > 96) setHidden(true);       // scrolling down, past the header
+        else if (y < last - 4) setHidden(false);        // scrolling up
+        last = y;
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
+
   return (
-    <header className="sticky top-0 z-50 bg-[var(--cream)]/90 backdrop-blur border-b border-[var(--line)]">
+    <header className={`sticky top-0 z-50 bg-[var(--cream)]/90 backdrop-blur border-b border-[var(--line)] transition-transform duration-300 will-change-transform ${hidden ? "-translate-y-full" : "translate-y-0"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 shrink-0" onClick={() => setOpen(false)}>
           <span className="w-9 h-9 sm:w-10 sm:h-10 bg-[var(--spruce)] rounded-xl flex items-center justify-center">
