@@ -132,23 +132,38 @@ flowchart TD
     H --> I[Choose Pro → Track project in one place]
 ```
 
-### Pro Onboarding & Value
+#### 1. Homeowner Journey (replace the first flowchart)
 ```mermaid
 flowchart TD
-    A[“Join as a Pro”] --> B[Verification form<br/>Business + Insurance + Licence]
-    B --> C[Manual review by RenoHub team]
-    C --> D[Approved → Profile live +<br/>access to real homeowner projects]
-    D --> E[Submit competitive quotes<br/>(no pay-to-play)]
-    E --> F[Win work → Deliver →<br/>Earn verified review]
+    A[Land on RenoHub] --> B[Hero + Value Props]
+    B --> C[Browse Categories or Post Job]
+    C --> D["Fill Post-Job Form\n~2 min, free"]
+    D --> E[Submit → /api/leads]
+    E --> F["Instant confirmation +\nWe’re matching you with verified GTA pros"]
+    F --> G[Pros send itemized quotes]
+    G --> H["Compare side-by-side +\nreal supplier material quotes"]
+    H --> I[Choose Pro → Track project in one place]
 ```
 
-### Supplier Integration (Unique Moat)
+#### 2. Pro Onboarding & Value (replace the second flowchart)
 ```mermaid
 flowchart TD
-    A[Homeowner or Pro requests materials] --> B[Platform surfaces real-time quotes<br/>from verified local GTA suppliers]
-    B --> C[Compare total project cost<br/>(labor + materials) in one view]
-    C --> D[Supplier fulfills →<br/>Platform tracks coordination]
+    A["Join as a Pro"] --> B["Verification form\nBusiness + Insurance + Licence"]
+    B --> C[Manual review by RenoHub team]
+    C --> D["Approved → Profile live +\naccess to real homeowner projects"]
+    D --> E["Submit competitive quotes\n(no pay-to-play)"]
+    E --> F["Win work → Deliver →\nEarn verified review"]
 ```
+
+#### 3. Supplier Integration (Unique Moat) (replace the third flowchart)
+```mermaid
+flowchart TD
+    A[Homeowner or Pro requests materials] --> B["Platform surfaces real-time quotes\nfrom verified local GTA suppliers"]
+    B --> C["Compare total project cost\n(labor + materials) in one view"]
+    C --> D["Supplier fulfills →\nPlatform tracks coordination"]
+```
+
+All other parts of the README (text, tables, Gantt chart, structure, etc.) remain excellent and do not need changes.
 
 ---
 
