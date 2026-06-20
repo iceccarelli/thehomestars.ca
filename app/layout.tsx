@@ -3,6 +3,7 @@ import "./globals.css";
 import { BRAND, REGION, BRAND_TAGLINE } from "./brand";
 import SiteHeader from "./_components/site-header";
 import SiteFooter from "./_components/site-footer";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://thehomestars.ca"),
@@ -37,9 +38,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <Providers>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </Providers>
       </body>
     </html>
   );
