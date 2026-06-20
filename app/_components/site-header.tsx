@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Menu, X, ArrowRight } from "lucide-react";
 import { BRAND, REGION } from "@/app/brand";
+import AuthNavLink from "./auth-nav-link";
 
 const NAV = [
   { href: "/how-it-works", label: "How it works" },
@@ -56,6 +57,7 @@ export default function SiteHeader() {
           {NAV.map((n) => (
             <Link key={n.href} href={n.href} className="nav-link" data-active={isActive(n.href)}>{n.label}</Link>
           ))}
+          <AuthNavLink />
           <Link href="/post-job" className="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm">
             Post a job <ArrowRight className="w-4 h-4" />
           </Link>
@@ -79,6 +81,7 @@ export default function SiteHeader() {
               {n.label}
             </Link>
           ))}
+          <AuthNavLink variant="mobile" onNavigate={() => setOpen(false)} />
           <Link href="/post-job" onClick={() => setOpen(false)}
             className="btn-primary w-full mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm">
             Post a job <ArrowRight className="w-4 h-4" />
