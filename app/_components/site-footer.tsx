@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Home, Phone, Mail, MapPin } from "lucide-react";
 import { BRAND, REGION, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL, CONTACT_ADDRESS } from "@/app/brand";
 import SocialRow from "./social-links";
+import CookiePreferencesButton from "./cookie-consent/cookie-preferences-button";
 
 const COLS = [
   { title: "Homeowners", links: [
@@ -55,7 +56,10 @@ export default function SiteFooter() {
         </div>
         <div className="mt-7 pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-[var(--ink-muted)]">
           <span>© {new Date().getFullYear()} {BRAND}. A {REGION} renovation marketplace.</span>
-          <span>Insurance-verified pros · Real reviews only · No paid placement</span>
+          <div className="flex items-center gap-4">
+            <span>Insurance-verified pros · Real reviews only · No paid placement</span>
+            <CookiePreferencesButton />
+          </div>
         </div>
       </div>
     </footer>
