@@ -3,11 +3,15 @@
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
+import CookieConsentBanner from './_components/cookie-consent/cookie-consent-banner';
+import AnalyticsScripts from './_components/cookie-consent/analytics-scripts';
 
 export default function Providers({ children }: { children: ReactNode }) {
   return (
     <SessionProvider>
       {children}
+      <CookieConsentBanner />
+      <AnalyticsScripts />
       <Toaster
         position="top-center"
         richColors

@@ -70,6 +70,7 @@ export default function LoginForm({ enabledProviders }: { enabledProviders: OAut
         const session = await getSession();
         router.push(session?.user?.role === "ADMIN" ? "/admin" : "/mypage");
       }
+      window.scrollTo(0, 0);
       router.refresh();
     } catch (err) {
       console.error("[login] error:", err);
