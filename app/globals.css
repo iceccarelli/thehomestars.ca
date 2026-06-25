@@ -72,6 +72,17 @@ body { background: var(--cream); color: var(--ink); font-family: var(--font-body
 .chip { background: #EFEAD9; color: var(--spruce); border-radius: 9999px; font-weight: 500; }
 .avatar { font-family: var(--font-display); color: #F6F1E7; display: flex; align-items: center; justify-content: center; font-weight: 600; letter-spacing: .02em; }
 
+/* ---------- header user menu ---------- */
+.user-menu-trigger { display: inline-flex; align-items: center; gap: .35rem; color: var(--ink); transition: color .2s; }
+.user-menu-trigger:hover { color: var(--spruce); }
+.user-menu-panel { position: absolute; right: 0; top: calc(100% + .75rem); width: 260px; background: var(--cream-soft); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 24px 40px -22px rgba(30,41,31,.35); padding: .85rem; z-index: 60; }
+.user-menu-name { font-weight: 700; font-size: .92rem; color: var(--ink); }
+.user-menu-email { font-size: .8rem; color: var(--ink-muted); margin-top: .15rem; word-break: break-all; }
+.user-menu-divider { height: 1px; background: var(--line); margin: .75rem 0; }
+.user-menu-item { display: flex; align-items: center; gap: .6rem; width: 100%; padding: .55rem .6rem; border-radius: 9px; font-size: .88rem; font-weight: 500; color: var(--ink); transition: background .15s; text-align: left; }
+.user-menu-item:hover { background: #F1EADA; }
+.user-menu-item.danger:hover { background: #FBEAEA; color: #B3261E; }
+
 /* ============================================================
    Cinematic hero — crossfade + Ken Burns (three motion paths)
    ============================================================ */
@@ -265,18 +276,10 @@ body { background: var(--cream); color: var(--ink); font-family: var(--font-body
 /* ── Portal layout (MyPage + Admin shared shell) ── */
 .portal-layout { display: flex; min-height: 100vh; background: var(--p-surface-warm); }
 .portal-sidebar { width: 260px; min-height: 100vh; background: var(--p-dark); color: var(--p-cream); display: flex; flex-direction: column; position: sticky; top: 0; flex-shrink: 0; }
-.portal-sidebar-brand { padding: 1.5rem 1.25rem 1rem; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: .5rem; }
-.portal-sidebar-brand .brand-copy strong { color: var(--p-cream); }
-.portal-sidebar-brand .brand-copy small { color: rgba(246,241,231,.5); }
 .portal-nav { flex: 1; padding: .5rem 0; display: flex; flex-direction: column; }
 .portal-nav-item { display: flex; align-items: center; gap: .75rem; padding: .65rem 1.25rem; color: rgba(246,241,231,.7); text-decoration: none; font-size: .9rem; font-weight: 500; transition: all .15s ease; border-left: 3px solid transparent; }
 .portal-nav-item:hover, .portal-nav-item.active { background: rgba(255,255,255,.06); color: var(--p-cream); border-left-color: var(--p-accent); }
-.portal-nav-icon { font-size: 1rem; width: 20px; text-align: center; }
-.portal-sidebar-footer { padding: 1.25rem; border-top: 1px solid rgba(255,255,255,.08); }
-.portal-user { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
-.portal-user-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--p-accent); color: #1E1402; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; text-transform: uppercase; flex-shrink: 0; }
-.portal-signout { background: transparent; border: 1px solid rgba(255,255,255,.15); color: rgba(246,241,231,.6); padding: .4rem .875rem; border-radius: var(--p-radius-md); font-size: .8rem; cursor: pointer; transition: all .15s; width: 100%; }
-.portal-signout:hover { background: rgba(255,255,255,.08); color: var(--p-cream); }
+.portal-nav-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; flex-shrink: 0; }
 .portal-main { flex: 1; overflow-x: hidden; min-width: 0; }
 .portal-page { padding: 2rem clamp(1.25rem, 3vw, 2rem); max-width: 1200px; }
 .portal-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
