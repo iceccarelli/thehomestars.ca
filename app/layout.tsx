@@ -3,6 +3,7 @@ import "./globals.css";
 import { BRAND, REGION, BRAND_TAGLINE } from "./brand";
 import SiteHeader from "./_components/site-header";
 import SiteFooter from "./_components/site-footer";
+import ChatWidget from "./_components/chat-widget";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />
+          <ChatWidget />
         </Providers>
       </body>
     </html>

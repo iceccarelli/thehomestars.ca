@@ -1,0 +1,152 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+
+const C = { cream: "#F6F1E7", paper: "#FFFFFF", spruce: "#1E3A2F", spruceDeep: "#16271F", brass: "#B5894E", ink: "#23201A", line: "#E6DDCD", muted: "#6E675B" };
+type Msg = { id: string; role: "user" | "assistant"; content: string };
+const QUICK = ["I'm planning a kitchen reno", "How does matching work?", "Find pros near me"];
+const uid = () => Math.random().toString(36).slice(2);
+
+export default function ChatWidget() {
+  const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [nudge, setNudge] = useState(false);
+  const [messages, setMessages] = useState<Msg[]>([]);
+  const [busy, setBusy] = useState(false);
+  const [errored, setErrored] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => { if (open) return; const t = setTimeout(() => setNudge(true), 6000); return () => clearTimeout(t); }, [open]);
+  useEffect(() => { scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" }); }, [messages, busy]);
+  useEffect(() => { if (open) setTimeout(() => inputRef.current?.focus(), 250); }, [open]);
+  useEffect(() => { const k = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false); window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k); }, []);
+
+  const send = async (text: string) => {
+    const t = text.trim();
+    if (!t || busy) return;
+    setErrored(false);
+    const history = [...messages, { id: uid(), role: "user" as const, content: t }];
+    setMessages(history);
+    setInput("");
+    setBusy(true);
+    const aId = uid();
+    setMessages((m) => [...m, { id: aId, role: "assistant", content: "" }]);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history.map(({ role, content }) => ({ role, content })) }),
+      });
+      if (!res.ok || !res.body) throw new Error("http " + res.status);
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+      let acc = "";
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += dec.decode(value, { stream: true });
+        setMessages((m) => m.map((x) => (x.id === aId ? { ...x, content: acc } : x)));
+      }
+    } catch {
+      setErrored(true);
+      setMessages((m) => m.filter((x) => x.id !== aId));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const waiting = busy && messages[messages.length - 1]?.role === "assistant" && !messages[messages.length - 1]?.content;
+
+  return (
+    <>
+      <style>{`
+        @keyframes rh-pop { from { opacity:0; transform: translateY(16px) scale(.96);} to { opacity:1; transform:none;} }
+        @keyframes rh-breathe { 0%,100% { box-shadow: 0 8px 24px rgba(22,39,31,.35), 0 0 0 0 rgba(181,137,78,.45);} 50% { box-shadow: 0 8px 24px rgba(22,39,31,.35), 0 0 0 10px rgba(181,137,78,0);} }
+        @keyframes rh-blink { 0%,80%,100% { opacity:.25; transform: translateY(0);} 40% { opacity:1; transform: translateY(-2px);} }
+        .rh-dot { width:6px;height:6px;border-radius:50%;background:${C.brass};display:inline-block;margin:0 2px;animation:rh-blink 1.3s infinite; }
+        .rh-chip:hover { background:${C.cream}; border-color:${C.brass}; color:${C.ink}; }
+        .rh-launch:hover { transform: scale(1.05); }
+      `}</style>
+
+      <div style={{ position: "fixed", bottom: 22, right: 22, zIndex: 60, display: "flex", alignItems: "flex-end", gap: 10 }}>
+        {!open && nudge && (
+          <div role="status" style={{ animation: "rh-pop .3s ease", maxWidth: 230, background: C.paper, color: C.ink, border: `1px solid ${C.line}`, borderRadius: 14, padding: "10px 12px", fontSize: 13.5, lineHeight: 1.35, boxShadow: "0 10px 30px rgba(30,41,31,.14)", position: "relative" }}>
+            Planning a renovation? Tell me about it and I&apos;ll line up verified pros.
+            <button onClick={() => setNudge(false)} aria-label="Dismiss" style={{ position: "absolute", top: 4, right: 6, border: "none", background: "none", color: C.muted, cursor: "pointer", fontSize: 14 }}>×</button>
+          </div>
+        )}
+        {!open && (
+          <button className="rh-launch" onClick={() => { setOpen(true); setNudge(false); }} aria-label="Chat with RenoHub" style={{ height: 60, width: 60, borderRadius: 999, border: "none", cursor: "pointer", background: `linear-gradient(135deg, ${C.spruce}, ${C.spruceDeep})`, display: "grid", placeItems: "center", animation: "rh-breathe 3.2s ease-in-out infinite", transition: "transform .15s ease" }}>
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#F6F1E7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M9 20v-6h6v6" /></svg>
+          </button>
+        )}
+      </div>
+
+      {open && (
+        <div role="dialog" aria-label="RenoHub chat" style={{ position: "fixed", zIndex: 60, bottom: "max(22px, env(safe-area-inset-bottom))", right: 22, width: "min(94vw, 392px)", height: "min(78vh, 600px)", display: "flex", flexDirection: "column", background: C.cream, borderRadius: 22, overflow: "hidden", border: `1px solid ${C.line}`, boxShadow: "0 24px 60px rgba(30,41,31,.28)", animation: "rh-pop .26s cubic-bezier(.2,.9,.3,1)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 11, padding: "14px 16px", background: `linear-gradient(135deg, ${C.spruce}, ${C.spruceDeep})`, color: "#fff" }}>
+            <span style={{ height: 38, width: 38, borderRadius: 11, background: "rgba(255,255,255,.16)", display: "grid", placeItems: "center" }}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#F6F1E7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M9 20v-6h6v6" /></svg>
+            </span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: "var(--font-display, Georgia), serif", fontSize: 17, fontWeight: 600 }}>RenoHub Concierge</div>
+              <div style={{ fontSize: 11.5, opacity: .92, display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ height: 7, width: 7, borderRadius: 50, background: "#7ee0a0", boxShadow: "0 0 0 2px rgba(126,224,160,.3)" }} />
+                Verified pros · Toronto &amp; GTA
+              </div>
+            </div>
+            <button onClick={() => setOpen(false)} aria-label="Close chat" style={{ border: "none", background: "rgba(255,255,255,.16)", color: "#fff", height: 30, width: 30, borderRadius: 8, cursor: "pointer", fontSize: 18, lineHeight: 1 }}>×</button>
+          </div>
+
+          <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: "16px 14px", background: C.cream }}>
+            {messages.length === 0 && (
+              <div style={{ animation: "rh-pop .3s ease" }}>
+                <div style={{ background: C.paper, border: `1px solid ${C.line}`, borderRadius: "4px 16px 16px 16px", padding: "12px 14px", fontSize: 14.5, color: C.ink, lineHeight: 1.5, boxShadow: "0 4px 14px rgba(30,41,31,.05)" }}>
+                  Hi — I&apos;m the <strong>RenoHub</strong> concierge. Tell me what you&apos;re renovating and where, and I&apos;ll post your job so verified local pros can reach out. What are you planning?
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}>
+                  {QUICK.map((q) => (<button key={q} className="rh-chip" onClick={() => send(q)} style={{ background: C.paper, border: `1px solid ${C.line}`, color: C.muted, borderRadius: 999, padding: "7px 13px", fontSize: 13, cursor: "pointer", transition: "all .15s ease" }}>{q}</button>))}
+                </div>
+              </div>
+            )}
+
+            {messages.map((m) => {
+              if (!m.content) return null;
+              const isUser = m.role === "user";
+              return (
+                <div key={m.id} style={{ display: "flex", justifyContent: isUser ? "flex-end" : "flex-start", margin: "10px 0" }}>
+                  <div style={{ maxWidth: "84%", padding: "10px 13px", fontSize: 14.5, lineHeight: 1.5, whiteSpace: "pre-wrap", borderRadius: isUser ? "16px 4px 16px 16px" : "4px 16px 16px 16px", background: isUser ? `linear-gradient(135deg, ${C.spruce}, ${C.spruceDeep})` : C.paper, color: isUser ? "#fff" : C.ink, border: isUser ? "none" : `1px solid ${C.line}`, boxShadow: isUser ? "0 4px 14px rgba(22,39,31,.22)" : "0 4px 14px rgba(30,41,31,.05)" }}>{m.content}</div>
+                </div>
+              );
+            })}
+
+            {waiting && (
+              <div style={{ display: "flex", justifyContent: "flex-start", margin: "10px 0" }}>
+                <div style={{ padding: "12px 14px", background: C.paper, border: `1px solid ${C.line}`, borderRadius: "4px 16px 16px 16px" }}>
+                  <span className="rh-dot" /><span className="rh-dot" style={{ animationDelay: ".18s" }} /><span className="rh-dot" style={{ animationDelay: ".36s" }} />
+                </div>
+              </div>
+            )}
+
+            {errored && (
+              <div style={{ margin: "10px 0", fontSize: 13, color: "#B3261E", background: "#FBEAEA", border: "1px solid #f0d3cc", borderRadius: 12, padding: "10px 12px" }}>
+                Something hiccuped on my end. Please try again in a moment.
+              </div>
+            )}
+          </div>
+
+          <div style={{ borderTop: `1px solid ${C.line}`, background: C.paper, padding: 10 }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <input ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send(input)} placeholder="e.g. kitchen reno in Leslieville…" style={{ flex: 1, border: `1px solid ${C.line}`, background: C.cream, borderRadius: 12, padding: "11px 13px", fontSize: 14, color: C.ink, outline: "none" }} />
+              <button onClick={() => send(input)} disabled={busy || !input.trim()} aria-label="Send" style={{ height: 42, width: 42, borderRadius: 12, border: "none", cursor: busy || !input.trim() ? "default" : "pointer", background: `linear-gradient(135deg, ${C.spruce}, ${C.spruceDeep})`, opacity: busy || !input.trim() ? 0.5 : 1, display: "grid", placeItems: "center" }}>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4 20-7Z" /></svg>
+              </button>
+            </div>
+            <div style={{ textAlign: "center", fontSize: 10.5, color: C.muted, marginTop: 7 }}>Verified local pros · RenoHub</div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
