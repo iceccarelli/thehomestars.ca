@@ -189,10 +189,3 @@ declare module 'next-auth' {
     };
   }
 }
-declare module '@auth/core/jwt' {
-  interface JWT {
-    id: string;
-    role: UserRole;
-    provider?: string;
-  }
-}
