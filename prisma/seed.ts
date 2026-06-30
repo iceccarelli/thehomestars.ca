@@ -1,5 +1,5 @@
 /**
- * RenoHub — Prisma Seed Script
+ * ProHomes — Prisma Seed Script
  *
  * Populates the database with realistic demo data for development.
  *
@@ -16,7 +16,7 @@ import bcrypt from 'bcryptjs';
 const db = new PrismaClient();
 
 async function main() {
-  console.log('🌱 Seeding RenoHub database...\n');
+  console.log('🌱 Seeding ProHomes database...\n');
 
   // ── Wipe in dependency order ─────────────────────────────────────────
   await db.payment.deleteMany();
@@ -39,7 +39,7 @@ async function main() {
       defaultMidpointPct: 40,
       defaultFinalPct: 30,
       defaultTaxRate: 13,  // Ontario HST
-      companyName: 'RenoHub Inc.',
+      companyName: 'Promaxima Home Renovation Marketplace and Digital Contractor Platform Inc.',
       companyAddress: '32 Norfield Crescent, Toronto, ON',
       companyPhone: '+1 (416) 249-1276',
       companyEmail: 'service@thehomestars.ca',
@@ -469,7 +469,7 @@ For a floating installation option: some of our engineered products can go over 
 Happy to come by for a free assessment — would next week work for you?
 
 Best,
-Mike @ RenoHub`,
+Mike @ ProHomes`,
       },
       {
         inquiryId: inq1.id,

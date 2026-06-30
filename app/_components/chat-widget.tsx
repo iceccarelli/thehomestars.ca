@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { BRAND } from "@/app/brand";
 
 const C = { cream: "#F6F1E7", paper: "#FFFFFF", spruce: "#1E3A2F", spruceDeep: "#16271F", brass: "#B5894E", ink: "#23201A", line: "#E6DDCD", muted: "#6E675B" };
 type Msg = { id: string; role: "user" | "assistant"; content: string };
@@ -77,20 +78,20 @@ export default function ChatWidget() {
           </div>
         )}
         {!open && (
-          <button className="rh-launch" onClick={() => { setOpen(true); setNudge(false); }} aria-label="Chat with RenoHub" style={{ height: 60, width: 60, borderRadius: 999, border: "none", cursor: "pointer", background: `linear-gradient(135deg, ${C.spruce}, ${C.spruceDeep})`, display: "grid", placeItems: "center", animation: "rh-breathe 3.2s ease-in-out infinite", transition: "transform .15s ease" }}>
+          <button className="rh-launch" onClick={() => { setOpen(true); setNudge(false); }} aria-label={`Chat with ${BRAND}`} style={{ height: 60, width: 60, borderRadius: 999, border: "none", cursor: "pointer", background: `linear-gradient(135deg, ${C.spruce}, ${C.spruceDeep})`, display: "grid", placeItems: "center", animation: "rh-breathe 3.2s ease-in-out infinite", transition: "transform .15s ease" }}>
             <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#F6F1E7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M9 20v-6h6v6" /></svg>
           </button>
         )}
       </div>
 
       {open && (
-        <div role="dialog" aria-label="RenoHub chat" style={{ position: "fixed", zIndex: 60, bottom: "max(22px, env(safe-area-inset-bottom))", right: 22, width: "min(94vw, 392px)", height: "min(78vh, 600px)", display: "flex", flexDirection: "column", background: C.cream, borderRadius: 22, overflow: "hidden", border: `1px solid ${C.line}`, boxShadow: "0 24px 60px rgba(30,41,31,.28)", animation: "rh-pop .26s cubic-bezier(.2,.9,.3,1)" }}>
+        <div role="dialog" aria-label={`${BRAND} chat`} style={{ position: "fixed", zIndex: 60, bottom: "max(22px, env(safe-area-inset-bottom))", right: 22, width: "min(94vw, 392px)", height: "min(78vh, 600px)", display: "flex", flexDirection: "column", background: C.cream, borderRadius: 22, overflow: "hidden", border: `1px solid ${C.line}`, boxShadow: "0 24px 60px rgba(30,41,31,.28)", animation: "rh-pop .26s cubic-bezier(.2,.9,.3,1)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 11, padding: "14px 16px", background: `linear-gradient(135deg, ${C.spruce}, ${C.spruceDeep})`, color: "#fff" }}>
             <span style={{ height: 38, width: 38, borderRadius: 11, background: "rgba(255,255,255,.16)", display: "grid", placeItems: "center" }}>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#F6F1E7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M9 20v-6h6v6" /></svg>
             </span>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontFamily: "var(--font-display, Georgia), serif", fontSize: 17, fontWeight: 600 }}>RenoHub Concierge</div>
+              <div style={{ fontFamily: "var(--font-display, Georgia), serif", fontSize: 17, fontWeight: 600 }}>{BRAND} Concierge</div>
               <div style={{ fontSize: 11.5, opacity: .92, display: "flex", alignItems: "center", gap: 6 }}>
                 <span style={{ height: 7, width: 7, borderRadius: 50, background: "#7ee0a0", boxShadow: "0 0 0 2px rgba(126,224,160,.3)" }} />
                 Verified pros · Toronto &amp; GTA
@@ -103,7 +104,7 @@ export default function ChatWidget() {
             {messages.length === 0 && (
               <div style={{ animation: "rh-pop .3s ease" }}>
                 <div style={{ background: C.paper, border: `1px solid ${C.line}`, borderRadius: "4px 16px 16px 16px", padding: "12px 14px", fontSize: 14.5, color: C.ink, lineHeight: 1.5, boxShadow: "0 4px 14px rgba(30,41,31,.05)" }}>
-                  Hi — I&apos;m the <strong>RenoHub</strong> concierge. Tell me what you&apos;re renovating and where, and I&apos;ll post your job so verified local pros can reach out. What are you planning?
+                  Hi — I&apos;m the <strong>{BRAND}</strong> concierge. Tell me what you&apos;re renovating and where, and I&apos;ll post your job so verified local pros can reach out. What are you planning?
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}>
                   {QUICK.map((q) => (<button key={q} className="rh-chip" onClick={() => send(q)} style={{ background: C.paper, border: `1px solid ${C.line}`, color: C.muted, borderRadius: 999, padding: "7px 13px", fontSize: 13, cursor: "pointer", transition: "all .15s ease" }}>{q}</button>))}
@@ -143,7 +144,7 @@ export default function ChatWidget() {
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4 20-7Z" /></svg>
               </button>
             </div>
-            <div style={{ textAlign: "center", fontSize: 10.5, color: C.muted, marginTop: 7 }}>Verified local pros · RenoHub</div>
+            <div style={{ textAlign: "center", fontSize: 10.5, color: C.muted, marginTop: 7 }}>Verified local pros · {BRAND}</div>
           </div>
         </div>
       )}

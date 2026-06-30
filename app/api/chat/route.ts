@@ -61,11 +61,11 @@ export async function POST(req: Request) {
             }});
             adminNotify(q.id);
             console.log(JSON.stringify({ event: 'lead.captured', source: 'chat', leadId: q.id }));
-            return { ok: true, quoteId: q.id, message: `Job posted. Saved. RenoHub is onboarding verified ${REGION} pros and the team will follow up personally as they come online.` };
+            return { ok: true, quoteId: q.id, message: `Job posted. Saved. ${BRAND} is onboarding verified ${REGION} pros and the team will follow up personally as they come online.` };
           } catch (err) {
             adminNotify('chat-fallback');
             console.log(JSON.stringify({ event: 'lead.captured', source: 'chat', leadId: 'fallback', lead, dbError: err instanceof Error ? err.message : 'unknown' }));
-            return { ok: true, quoteId: null, message: `Got it — your job is saved — RenoHub is onboarding pros in your area and the team will follow up personally.` };
+            return { ok: true, quoteId: null, message: `Got it — your job is saved — ${BRAND} is onboarding pros in your area and the team will follow up personally.` };
           }
         },
       }),

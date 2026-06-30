@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Home, Phone, Mail, MapPin } from "lucide-react";
-import { BRAND, REGION, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL, CONTACT_ADDRESS } from "@/app/brand";
+import { BRAND, LEGAL_NAME, REGION, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL, CONTACT_ADDRESS, POWERED_BY_NAME, POWERED_BY_URL } from "@/app/brand";
 import SocialRow from "./social-links";
 import CookiePreferencesButton from "./cookie-consent/cookie-preferences-button";
 
@@ -55,11 +55,15 @@ export default function SiteFooter() {
           <SocialRow />
         </div>
         <div className="mt-7 pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row gap-2 items-center justify-between text-xs text-[var(--ink-muted)]">
-          <span>© {new Date().getFullYear()} {BRAND}. A {REGION} renovation marketplace.</span>
+          <span>© {new Date().getFullYear()} {LEGAL_NAME} — {BRAND}. A {REGION} renovation marketplace.</span>
           <div className="flex items-center gap-4">
             <span>Insurance-verified pros · Real reviews only · No paid placement</span>
             <CookiePreferencesButton />
           </div>
+        </div>
+        <div className="mt-5 pt-5 border-t border-[var(--line)] text-center text-xs text-[var(--ink-muted)]">
+          Powered by{" "}
+          <a href={POWERED_BY_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-[var(--spruce)] hover:text-[var(--brass)] transition-colors">{POWERED_BY_NAME}</a>
         </div>
       </div>
     </footer>
